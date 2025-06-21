@@ -80,7 +80,6 @@ class HomeScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(height: ASizes.spaceBtwItems),
                     Row(
                       children: [
                         Flexible(
@@ -148,50 +147,56 @@ class HomeScreen extends StatelessWidget {
                           height: AHelperFunctions.screenHeight(context),
                           radius: ASizes.md,
                           backgroundColor: Color(0xFF377492),
-                          decorationImage: DecorationImage(
-                            image: AssetImage(banner.imageUrl),
-                            fit: BoxFit.contain,
-                            alignment: Alignment.topRight,
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                              vertical: ASizes.defaultSpace,
-                              horizontal: ASizes.defaultSpace * 1.5,
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    banner.title,
-                                    style: Theme.of(
-                                      context,
-                                    ).textTheme.headlineLarge!.apply(
-                                      color: Colors.white,
-                                      fontWeightDelta: 2,
-                                    ),
-                                    maxLines: 2,
-                                  ),
+                          child: Stack(
+                            children: [
+                              Positioned(
+                                top: 30,
+                                right: -120,
+                                child: Image(
+                                  image: AssetImage(banner.imageUrl),
                                 ),
-                                SizedBox(height: ASizes.spaceBtwItems),
-                                ARoundedContainer(
-                                  width: 120,
-                                  height: 50,
-                                  radius: 50,
-                                  backgroundColor: Colors.transparent,
-                                  child: Center(
-                                    child: Text(
-                                      'Shop Now',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: ASizes.fontSizeLg,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: ASizes.defaultSpace,
+                                  horizontal: ASizes.defaultSpace * 1.5,
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        banner.title,
+                                        style: Theme.of(
+                                          context,
+                                        ).textTheme.headlineLarge!.apply(
+                                          color: Colors.white,
+                                          fontWeightDelta: 2,
+                                        ),
+                                        maxLines: 2,
                                       ),
                                     ),
-                                  ),
+                                    SizedBox(height: ASizes.spaceBtwItems),
+                                    ARoundedContainer(
+                                      width: 120,
+                                      height: 50,
+                                      radius: 50,
+                                      backgroundColor: Colors.transparent,
+                                      child: Center(
+                                        child: Text(
+                                          'Shop Now',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: ASizes.fontSizeLg,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       )
@@ -247,13 +252,11 @@ class HomeScreen extends StatelessWidget {
                     },
                   ),
                 ),
-                SizedBox(height: ASizes.spaceBtwItems),
                 Container(
-                  margin: const EdgeInsets.all(16),
-                  padding: const EdgeInsets.all(16),
+                  margin: const EdgeInsets.symmetric(horizontal: 16),
                   decoration: BoxDecoration(
                     color: AColors.primaryColor,
-                    borderRadius: BorderRadius.circular(40),
+                    borderRadius: BorderRadius.circular(25),
                   ),
                   child: Row(
                     children: [
@@ -262,37 +265,49 @@ class HomeScreen extends StatelessWidget {
                         child: Stack(
                           children: [
                             Container(
-                              padding: const EdgeInsets.all(10),
-                              decoration: const BoxDecoration(
-                                color: Colors.white,
-                                shape: BoxShape.circle,
-                              ),
-                              child: const Icon(
-                                Icons.emoji_events, // Trophy icon
-                                color: Colors.orange,
-                                size: 28,
+                              width: 80, // adjust to your size
+                              height: 80, // adjust to your size
+                            ),
+                            Positioned(
+                              top: -10,
+                              left: -20,
+                              child: Container(
+                                width: 100,
+                                height: 100,
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      Colors.white.withOpacity(0.6),
+                                      Colors.white.withOpacity(0.0),
+                                    ],
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.center,
+                                  ),
+                                  borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(50),
+                                    bottomRight: Radius.circular(50),
+                                  ),
+                                  border: Border.all(color: Colors.transparent),
+                                ),
                               ),
                             ),
-                            // Positioned(
-                            //   child: Container(
-                            //     width: 90,
-                            //     height: 90,
-                            //     decoration: const BoxDecoration(
-                            //       gradient: LinearGradient(
-                            //         colors: [
-                            //           Color(0xFFB2E94B), // light green
-                            //           Color(0xFF4CB947), // dark green
-                            //         ],
-                            //         begin: Alignment.topLeft,
-                            //         end: Alignment.bottomRight,
-                            //       ),
-                            //       borderRadius: BorderRadius.only(
-                            //         topRight: Radius.circular(40),
-                            //         bottomRight: Radius.circular(40),
-                            //       ),
-                            //     ),
-                            //   ),
-                            // ),
+                            Positioned.fill(
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Container(
+                                  padding: const EdgeInsets.all(10),
+                                  decoration: const BoxDecoration(
+                                    color: Colors.white,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: const Icon(
+                                    Icons.emoji_events, // Trophy icon
+                                    color: Colors.orange,
+                                    size: 28,
+                                  ),
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -317,11 +332,11 @@ class HomeScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(8),
                               child: LinearProgressIndicator(
                                 value: 0.6, // Adjust progress here
-                                backgroundColor: Colors.white.withOpacity(0.3),
+                                backgroundColor: Colors.black.withOpacity(0.3),
                                 valueColor: const AlwaysStoppedAnimation<Color>(
                                   Color(0xFF1B5E20), // Dark green progress bar
                                 ),
-                                minHeight: 6,
+                                minHeight: 8,
                               ),
                             ),
                             const SizedBox(height: 6),
@@ -335,17 +350,45 @@ class HomeScreen extends StatelessWidget {
                           ],
                         ),
                       ),
+                      Stack(
+                        children: [
+                          // Background Gradient Container
+                          Container(
+                            width: 100, // adjust to your size
+                            height: 80, // adjust to your size
+                          ),
 
-                      const SizedBox(width: 8),
+                          // Circular Overlay
+                          Positioned(
+                            bottom: -35,
+                            right: -30,
+                            child: Container(
+                              width: 100,
+                              height: 100,
+                              decoration: BoxDecoration(
+                                color: Colors.black.withOpacity(
+                                  0.05,
+                                ), // or use a green shade with opacity
+                                shape: BoxShape.circle,
+                              ),
+                            ),
+                          ),
 
-                      // Arrow Icon
-                      SizedBox(
-                        width: 40,
-                        child: const Icon(
-                          Icons.arrow_forward_ios,
-                          color: Colors.white,
-                          size: 20,
-                        ),
+                          // Arrow Icon
+                          Positioned.fill(
+                            child: Align(
+                              alignment: Alignment.centerRight,
+                              child: Padding(
+                                padding: const EdgeInsets.only(right: 20.0),
+                                child: Icon(
+                                  Icons.arrow_forward_ios,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
